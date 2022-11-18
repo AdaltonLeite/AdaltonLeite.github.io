@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -172,7 +173,8 @@
 "borderRadiusFull": "",
 
 "formPadding": ""
-				</textarea>
+				</textarea
+            >
           </div>
           <div>
             <label>Textos customizados</label>
@@ -203,7 +205,8 @@
 "selectInstallments": "",
 "selectIssuerBank": "",
 "formSubmit": ""
-				</textarea>
+				</textarea
+            >
           </div>
         </div>
 
@@ -287,13 +290,20 @@
         </div>
       </div>
       <div style="padding-left: 2rem">
-        <button class="btn btn-primary" id="load-brick-btn" style="margin-top: 16px" onclick="startBrick()">
+        <button
+          class="btn btn-primary"
+          id="load-brick-btn"
+          style="margin-top: 16px"
+          onclick="startBrick()"
+        >
           Carregar Brick
         </button>
       </div>
     </section>
     <div id="mercadopago-bricks-container__PaymentCard" style="width: 500px"></div>
-    <span id="i18n_injected_by_webpack" style="display: none;"><%= JSON.stringify(htmlWebpackPlugin.options.i18nEN) %></span>
+    <span id="i18n_injected_by_webpack" style="display: none"
+      ><%= JSON.stringify(htmlWebpackPlugin.options.i18nEN) %></span
+    >
 
     <script>
       const startBrick = () => {
@@ -305,10 +315,10 @@
         if (!publicKey) {
           publicKey = document.getElementById('site').value;
         }
-        
+
         const commonSettings = getCommonSettings();
         const id = 'mercadopago-bricks-container__PaymentCard';
-        
+
         // CardPayment is a class injected by the WebPack
         if (typeof CardPayment === 'undefined') {
           initializeUsingSdk(id, commonSettings, publicKey);
@@ -324,7 +334,7 @@
         Colombia: 'MCO',
         Chile: 'MLC',
         Uruguay: 'MLU',
-        Peru: 'MPE'
+        Peru: 'MPE',
       };
 
       const initializeUsingClass = async (id, settings, publicKey) => {
@@ -332,19 +342,19 @@
 
         const selectedSite = document.getElementById('site').value;
         settings.site = siteMap[selectedSite];
-        settings.translation = JSON.parse(document.getElementById('i18n_injected_by_webpack').innerText);
+        settings.translation = JSON.parse(
+          document.getElementById('i18n_injected_by_webpack').innerText,
+        );
         settings.sdkInstance = new MercadoPago(publicKey);
         settings.publicKey = publicKey;
         settings.trackingManager = {
-          melidata: () => (
-            {
-              send: (type, data) => console.log(type, data), 
-              addContext: (context) => console.log(context)
-            }
-          )
-        }
+          melidata: () => ({
+            send: (type, data) => console.log(type, data),
+            addContext: (context) => console.log(context),
+          }),
+        };
 
-        if(!settings.locale) {
+        if (!settings.locale) {
           settings.locale = 'pt';
         }
 
@@ -430,7 +440,7 @@
               types: {
                 excluded,
               },
-            }        
+            },
           },
         };
         if (language) {
