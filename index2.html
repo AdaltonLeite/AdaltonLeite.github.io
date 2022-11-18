@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Checkout Bricks - Sandbox</title>
+
+    <script src="https://beta-sdk.mercadopago.com/gama/js/v2"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <style>
+      th,
+      td {
+        border: 1px solid black;
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body
+    style="
+      background-color: #e5e5e5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+    "
+  >
+    <section style="width: 100%">
+      <h2>Bricks Sandbox</h2>
+      <div
+        class="row pl-3"
+        style="display: flex; align-items: center; justify-content: space-between; padding: 0 2rem"
+      >
+        <div class="col-md-2 d-flex form-group">
+          <div>
+            <label class="w-50">Largura do Brick</label>
+            <input class="w-50 form-control" type="number" name="" id="bricksWidth" value="500" />
+          </div>
+          <div>
+            <label class="w-50">Email do pagador</label>
+            <input class="w-50 form-control" type="email" id="email" />
+          </div>
+          <div>
+            <label class="w-50">Documento do pagador</label>
+            <input class="w-50 form-control" id="docType" type="text" placeholder="Tipo" />
+            <input class="form-control" type="number" id="docNum" placeholder="Valor" />
+          </div>
+          <div>
+            <label class="w-50" class="w-50">Valor</label>
+            <input class="w-50 form-control" type="number" id="amount" value="100" />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label>Mostrar botao Pagar</label>
+            <br />
+            <input type="radio" checked name="showPaymentButton" value="true" />
+            <label>Sim</label><br />
+            <input type="radio" name="showPaymentButton" value="false" />
+            <label for="css">Nao</label><br />
+          </div>
+          <div>
+            <label>Mostrar título do formulário</label>
+            <br />
+            <input type="radio" checked name="showFormTitle" value="true" />
+            <label>Sim</label><br />
+            <input type="radio" name="showFormTitle" value="false" />
+            <label for="css">Nao</label><br />
+          </div>
+          <div>
+            <label>Controle de parcelas</label>
+            <br />
+            <input type="number" name="minInstallments" id="minInstallments" />
+            <label>Min</label><br />
+            <input type="number" name="maxInstallments" id="maxInstallments" />
+            <label>Max</label><br />
+            <label>Métodos de pagamento</label><br />
+            <input type="checkbox" checked id="credit_card" value="credit_card" />
+            <label>Cartão de crédito</label><br />
+            <input type="checkbox" checked id="debit_card" value="debit_card" />
+            <label>Cartão de débito</label><br />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label>Tema</label>
+            <select class="form-control" id="theme">
+              <option selected value="default">default</option>
+              <option value="dark">dark</option>
+              <option value="flat">flat</option>
+              <option value="bootstrap">bootstrap</option>
+            </select>
+          </div>
+          <div>
+            <label>Idioma</label>
+            <select class="form-control" id="lang">
+              <option value="">herdar da SDK</option>
+              <option value="pt">pt</option>
+              <option value="es">es</option>
+              <option value="es-ar">es-ar</option>
+              <option value="es-mx">es-mx</option>
+              <option value="es-cl">es-cl</option>
+              <option value="es-co">es-co</option>
+              <option value="es-pe">es-pe</option>
+              <option value="en">en</option>
+            </select>
+          </div>
+          <div>
+            <label>Site</label>
+            <select class="form-control" id="site">
+              <option selected value="TEST-850db05a-5f8d-4c89-ab79-f44a7b2d224e">Brasil</option>
+              <option value="TEST-75b81c16-aa24-4002-83d8-875ae72fc79e">Argentina</option>
+              <option value="TEST-dc90b2be-67e2-4802-a8f9-1d3ce34fe3cf">Mexico</option>
+              <option value="TEST-38039ba8-da7f-49be-ba2a-9930dd675037">Colombia</option>
+              <option value="TEST-165a0ccf-a384-4560-9074-b4c40faa86d9">Chile</option>
+              <option value="TEST-df0ef381-6bd4-4867-89e0-eb6821270fee">Uruguay</option>
+              <option value="TEST-173bfe16-5959-447e-89cd-ff0946f5f660">Peru</option>
+            </select>
+          </div>
+          <div>
+            <label>Public key (opcional)</label>
+            <input class="form-control" type="text" id="pk" />
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label>Variaveis customizadas</label>
+            <textarea class="form-control" id="customVariables" cols="30" rows="5">
+"textPrimaryColor": "",
+"textSecondaryColor": "",
+"inputBackgroundColor": "",
+"formBackgroundColor": "",
+"baseColor": "",
+"baseColorFirstVariant": "",
+"baseColorSecondVariant": "",
+"errorColor": "",
+"successColor": "",
+"outlinePrimaryColor": "",
+"outlineSecondaryColor": "",
+"buttonTextColor": "",
+
+"fontSizeExtraSmall": "",
+"fontSizeSmall": "",
+"fontSizeMedium": "",
+"fontSizeLarge": "",
+"fontSizeExtraLarge": "",
+
+"fontWeightNormal": "",
+"fontWeightSemiBold": "",
+"formInputsTextTransform": "",
+
+"inputVerticalPadding": "",
+"inputHorizontalPadding": "",
+"inputFocusedBoxShadow": "",
+"inputErrorFocusedBoxShadow": "",
+
+"inputBorderWidth": "",
+"inputFocusedBorderWidth": "",
+"borderRadiusSmall": "",
+"borderRadiusMedium": "",
+"borderRadiusLarge": "",
+"borderRadiusFull": "",
+
+"formPadding": ""
+				</textarea
+            >
+          </div>
+          <div>
+            <label>Textos customizados</label>
+            <textarea class="form-control" id="customTexts" cols="30" rows="5">
+"formTitle": "",
+"emailSectionTitle": "",
+"installmentsSectionTitle": "",
+"cardholderName": {
+	"label": "",
+	"placeholder": ""
+},
+"email": {
+	"label": "",
+	"placeholder": ""
+},
+"cardholderIdentification": {
+	"label": ""
+},
+"cardNumber": {
+	"label": ""
+},
+"expirationDate": {
+	"label": ""
+},
+"securityCode": {
+	"label": ""
+},
+"selectInstallments": "",
+"selectIssuerBank": "",
+"formSubmit": ""
+				</textarea
+            >
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label>Brick Pronto</label>
+            <input class="form-control" type="checkbox" disabled id="isReady" />
+          </div>
+          <div>
+            <label>Cartões para teste</label>
+            <span>(Você encontra os cartões na seção cartões de teste)</span>
+            <ul>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.br/developers/pt/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MLB</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.ar/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MLA</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.mx/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MLM</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.co/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MCO</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.uy/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MLU</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.cl/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MLC</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.mercadopago.com.pe/developers/es/docs/checkout-api/integration-test/test-cards"
+                  target="_blank"
+                  >MPE</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+          <div>
+            <label>Mensagem de Erro ao integrador</label>
+            <textarea class="form-control" disabled id="errorMessage" cols="30" rows="5"></textarea>
+          </div>
+          <div>
+            <label>Resposta do formulário</label>
+            <textarea
+              class="form-control"
+              disabled
+              id="submitMessage"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div style="padding-left: 2rem">
+        <button
+          class="btn btn-primary"
+          id="load-brick-btn"
+          style="margin-top: 16px"
+          onclick="startBrick()"
+        >
+          Carregar Brick
+        </button>
+      </div>
+    </section>
+    <div id="mercadopago-bricks-container__PaymentCard" style="width: 500px"></div>
+    <span id="i18n_injected_by_webpack" style="display: none"
+      ><%= JSON.stringify(htmlWebpackPlugin.options.i18nEN) %></span
+    >
+
+    <script>
+      const startBrick = () => {
+        if (window.brickInstance) {
+          window.brickInstance.unmount();
+        }
+
+        let publicKey = document.getElementById('pk').value;
+        if (!publicKey) {
+          publicKey = document.getElementById('site').value;
+        }
+
+        const commonSettings = getCommonSettings();
+        const id = 'mercadopago-bricks-container__PaymentCard';
+
+        // CardPayment is a class injected by the WebPack
+        if (typeof CardPayment === 'undefined') {
+          initializeUsingSdk(id, commonSettings, publicKey);
+        } else {
+          initializeUsingClass(id, commonSettings, publicKey);
+        }
+      };
+
+      const siteMap = {
+        Brasil: 'MLB',
+        Argentina: 'MLA',
+        Mexico: 'MLM',
+        Colombia: 'MCO',
+        Chile: 'MLC',
+        Uruguay: 'MLU',
+        Peru: 'MPE',
+      };
+
+      const initializeUsingClass = async (id, settings, publicKey) => {
+        const bricks = new CardPayment();
+
+        const selectedSite = document.getElementById('site').value;
+        settings.site = siteMap[selectedSite];
+        settings.translation = JSON.parse(
+          document.getElementById('i18n_injected_by_webpack').innerText,
+        );
+        settings.sdkInstance = new MercadoPago(publicKey);
+        settings.publicKey = publicKey;
+        settings.trackingManager = {
+          melidata: () => ({
+            send: (type, data) => console.log(type, data),
+            addContext: (context) => console.log(context),
+          }),
+        };
+
+        if (!settings.locale) {
+          settings.locale = 'pt';
+        }
+
+        window.brickInstance = await bricks.initialize(id, settings);
+      };
+
+      const initializeUsingSdk = async (id, settings, publicKey) => {
+        const mp = new MercadoPago(publicKey);
+        const bricks = mp.bricks();
+        window.brickInstance = await bricks.create('cardPayment', id, settings);
+      };
+
+      const getCommonSettings = () => {
+        const brickWidth = document.getElementById('bricksWidth').value;
+        const container = document.getElementById('mercadopago-bricks-container__PaymentCard');
+        container.setAttribute('style', `width:${brickWidth}px`);
+        document.getElementById('isReady').checked = false;
+        document.getElementById('errorMessage').value = '';
+        document.getElementById('submitMessage').value = '';
+        const theme = document.getElementById('theme').value;
+        const hidePaymentButton =
+          document.querySelector('input[name="showPaymentButton"]:checked').value !== 'true';
+        const hideFormTitle =
+          document.querySelector('input[name="showFormTitle"]:checked').value !== 'true';
+        const email = document.getElementById('email').value;
+        const docType = document.getElementById('docType').value;
+        const docNum = document.getElementById('docNum').value;
+        const amount = document.getElementById('amount').value;
+        const language = document.getElementById('lang').value;
+        const minInstallments = document.getElementById('minInstallments').value;
+        const maxInstallments = document.getElementById('maxInstallments').value;
+        const identification = {};
+        const customVariables = JSON.parse(`{${document.getElementById('customVariables').value}}`);
+        const texts = JSON.parse(`{${document.getElementById('customTexts').value}}`);
+        const excluded = [];
+        if (!document.getElementById('credit_card').checked) {
+          excluded.push('credit_card');
+        }
+        if (!document.getElementById('debit_card').checked) {
+          excluded.push('debit_card');
+        }
+        if (docNum) {
+          identification.number = docNum;
+          identification.type = docType;
+        }
+        const settings = {
+          initialization: {
+            amount,
+            payer: {
+              email,
+              identification,
+            },
+          },
+          callbacks: {
+            onSubmit: (data) => {
+              return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  document.getElementById('submitMessage').value = JSON.stringify(data);
+                  resolve();
+                }, 1000);
+              });
+            },
+            onReady: (error) => {
+              document.getElementById('isReady').checked = true;
+            },
+            onError: (error) => {
+              document.getElementById('errorMessage').value = JSON.stringify(error);
+            },
+          },
+          customization: {
+            visual: {
+              style: {
+                theme,
+                customVariables,
+              },
+              texts,
+              hidePaymentButton,
+              hideFormTitle,
+            },
+            paymentMethods: {
+              minInstallments,
+              maxInstallments,
+              types: {
+                excluded,
+              },
+            },
+          },
+        };
+        if (language) {
+          settings.locale = language;
+        }
+        return settings;
+      };
+    </script>
+  </body>
+</html>
