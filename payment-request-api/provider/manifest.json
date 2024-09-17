@@ -1,0 +1,35 @@
+{
+    "name": "Pay with Pay",
+    "short_name": "Pay",
+    "description": "This is an example of the Payment Handler API.",
+    "icons": [
+      {
+        "src": "icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "serviceworker": {
+      "src": "service-worker.js",
+      "scope": "/fido/pay/provider/",
+      "use_cache": false
+    },
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#3f51b5",
+    "background_color": "#3f51b5",
+    "prefer_related_applications": true,
+    "related_applications": [
+      {
+        "platform": "play",
+        "id": "com.example.pablosforpaymentapp",
+        "min_version": "1",
+        "fingerprints": [
+          {
+            "type": "sha256_cert",
+            "value": "B2:FA:27:31:4B:BF:97:D8:35:9E:55:D8:7B:0B:60:38:E2:55:7D:19:C4:31:A9:70:B2:F4:6B:11:AB:32:09:DA"
+          }
+        ]
+      }
+    ]
+  }
