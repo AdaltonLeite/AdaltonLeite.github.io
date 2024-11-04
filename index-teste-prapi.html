@@ -1,0 +1,136 @@
+Claro! Vou mostrar como incorporar esse JavaScript em um arquivo HTML completo. Este exemplo criará uma página simples
+que utiliza o Payment Request API e inclui um botão para iniciar o processo de pagamento.
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Payment Request API</title>
+</head>
+
+<body>
+    <h1>Exemplo de Pagamento</h1>
+    <button id="payButton">Pagar</button>
+
+    <script>
+
+const paymentMethods = [
+                    {
+                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html',
+                        data: {
+                            siteID: 'MLA',
+                            publicKey: 'asfsg',
+                            email: 'teste@gmail.com'
+                        }
+                    }
+                ];
+
+                // Define os detalhes da transação
+                const paymentDetails = {
+                    displayItems: [
+                        {
+                            label: 'Produto X',
+                            amount: { currency: 'BRL', value: '50.00' }
+                        },
+                        {
+                            label: 'Produto X',
+                            amount: { currency: 'BRL', value: '50.00' }
+                        }
+                    ],
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                };
+
+                // Define as opções do cliente
+                const paymentOptions = {
+                    requestPayerName: false,
+                    requestPayerEmail: false,
+                    requestPayerPhone: false,
+                    requestShipping: false // Permite edição do endereço de envio
+                };
+
+                // Cria um novo objeto PaymentRequest
+                const request = new PaymentRequest(paymentMethods, paymentDetails, paymentOptions).canMakePayment()
+
+
+        // Função para manipular o clique no botão de pagamento
+        document.getElementById('payButton').addEventListener('click', function () {
+            // Verifica se o Payment Request API é suportado pelo navegador
+            if (window.PaymentRequest) {
+                // Define os métodos de pagamento aceitos
+                const paymentMethods = [
+                    {
+                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html',
+                        data: {
+                            siteID: 'MLA',
+                            publicKey: 'asfsg',
+                            email: 'teste@gmail.com'
+                        }
+                    }
+                ];
+
+                // Define os detalhes da transação
+                const paymentDetails = {
+                    displayItems: [
+                        {
+                            label: 'Produto X',
+                            amount: { currency: 'BRL', value: '50.00' }
+                        },
+                        {
+                            label: 'Produto X',
+                            amount: { currency: 'BRL', value: '50.00' }
+                        }
+                    ],
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                };
+
+                // Define as opções do cliente
+                const paymentOptions = {
+                    requestPayerName: false,
+                    requestPayerEmail: false,
+                    requestPayerPhone: false,
+                    requestShipping: false // Permite edição do endereço de envio
+                };
+
+                // Cria um novo objeto PaymentRequest
+                const request = new PaymentRequest(paymentMethods, paymentDetails, paymentOptions);
+
+                // Exibe o sheet de pagamento
+                request.show()
+                    .then(paymentResponse => {
+                        // Aqui você pode processar o pagamento
+                        console.log('Detalhes do pagamento:', paymentResponse);
+
+                        // Marcar a transação como sucesso ou falha
+                        return paymentResponse.complete('success');
+                    })
+                    .catch(err => {
+                        console.error('Erro ao exibir o Payment Request:', err);
+                    });
+            } else {
+                console.error('Payment Request API não é suportado pelo navegador.');
+            }
+        });
+    </script>
+</body>
+
+</html>
+```
+
+### Como funciona:
+- **Estrutura HTML**: Possui um título simples e um botão que, ao ser clicado, inicia o processo de pagamento.
+- **JavaScript**: Configura o Payment Request API, define métodos de pagamento, detalhes da transação e opções de
+pagamento que requerem informações do pagador e endereço de envio.
+- **Eventos de Clique**: O `addEventListener` é usado para iniciar o processo de pagamento quando o botão é clicado.
+- **Verificação de Suporte**: Verifica se o navegador suporta o Payment Request API antes de prosseguir.
+
+Este exemplo funciona em navegadores que suportam a Payment Request API e rapidamente fornece uma interface de usuário
+familiar para editar métodos de pagamento e endereços de envio, se necessário.
