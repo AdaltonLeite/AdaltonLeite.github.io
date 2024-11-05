@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" id="html" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <script src="https://beta-sdk.mercadopago.com/gama/js/v2"></script>
+    <link rel="stylesheet" href="cart-style.css">
+</head>
+
+<body>
+    <div class="product-container">
+        <div class="image">
+            <img id="productImage" width="350" height="auto" src="https://assets.codepen.io/7773162/green.png" />
+        </div>
+        <div class="details">
+            <h1 class="cost">$200</h1>
+            <h3 class="title">Nike Ultraboost 22</h3>
+        </div>
+    </div>
+
+    <div class="card-container">
+        <div class="payment-method-selector">
+            <ul id="payment_method--selector">
+                <li data-target="melipay" class="active">Melipay</li>
+                <li data-target="card-details"><i class="icon icon-credit-card"></i>Credit</li>
+
+            </ul>
+        </div>
+        <div id="card-details" class="card-details">
+            <div class="card-number field">
+                <label for="cn">CARD NUMBER</label>
+                <input id="cn" type="text" />
+            </div>
+            <div class="card-name field">
+                <label for="cna">NAME ON CARD</label>
+                <input id="cna" type="text" />
+            </div>
+            <div class="expires field">
+                <label for="exp">EXPIRES</label>
+                <input id="exp" type="text" />
+            </div>
+            <div class="cvc field">
+                <label for="cvc">CVV</label>
+                <input id="cvc" type="text" />
+            </div>
+        </div>
+
+        <div id="melipay" class="melipay">
+            <div id="loadingFIDO" class="loading">
+                <img src="mercadopago.png" />
+                <p id="loadingmsg">Paga con tus tarjetas guardadas, sin completar datos</p>
+                <img src="brands.png" />
+            </div>
+
+        </div>
+        <button id="purchase-button" class="purchase-button" onclick="initPrapi()"
+            data-content="CONTINUE">CONTINUE</button>
+    </div>
+
+    <script>
+
+        function initPrapi() {
+            if (window.PaymentRequest) {
+                // Define os métodos de pagamento aceitos
+                const paymentMethods = [
+                    {
+                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html',
+                        data: {
+                            siteID: 'MLA',
+                            publicKey: 'asfsg',
+                            email: 'teste@gmail.com'
+                        }
+                    }
+                ];
+
+                // Define os detalhes da transação
+                const paymentDetails = {
+                    displayItems: [
+                        {
+                            label: 'Produto X',
+                            amount: { currency: 'BRL', value: '50.00' }
+                        }
+                    ],
+                    total: {
+                        label: 'Total',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                };
+
+                // Cria um novo objeto PaymentRequest
+                const request = new PaymentRequest(paymentMethods, paymentDetails);
+
+                // Exibe o sheet de pagamento
+                request.show()
+                    .then(paymentResponse => {
+                        // Aqui você pode processar o pagamento
+                        console.log('Detalhes do pagamento:', paymentResponse);
+
+                        // Marcar a transação como sucesso ou falha
+                        return paymentResponse.complete('success');
+                    })
+                    .catch(err => {
+                        console.error('Erro ao exibir o Payment Request:', err);
+                    });
+            } else {
+                console.error('Payment Request API não é suportado pelo navegador.');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuItems = document.querySelectorAll("#payment_method--selector li");
+            const divs = document.querySelectorAll(".card-details, .melipay");
+
+            menuItems.forEach(item => {
+                item.addEventListener("click", function () {
+                    const targetId = this.getAttribute('data-target');
+                    const targetDiv = document.getElementById(targetId);
+
+                    // Remover a classe active de todos os itens 
+                    menuItems.forEach(menuItem => {
+                        menuItem.classList.remove('active');
+                    });
+
+                    // Adicionar a classe active ao item clicado
+                    this.classList.add('active');
+
+                    // Esconder todas as divs
+                    divs.forEach(div => {
+                        div.style.display = 'none';
+                    });
+                    // Mostrar a div correspondente
+                    targetDiv.style.display = 'grid';
+
+                    if (targetId === 'melipay') {
+                        if (!savedDataInfo?.id) {
+                            document.getElementById('purchase-button').style.display = 'none'
+                            initFido()
+                        }
+                    } else {
+                        document.getElementById('purchase-button').style.display = 'grid'
+                    }
+
+                });
+            });
+        });
+
+
+
+    </script>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Recupera o valor do parâmetro 'id'
+        const id = getQueryParam('id');
+
+        // Adiciona uma classe na tag HTML
+        const elemento = document.getElementById('html');
+        if (id) {
+            elemento.classList.add(id);
+            console.log(`Valor do id: ${id}`);
+        }
+
+        // Muda a URL da imagem
+        const imagem = document.getElementById('productImage');
+        if (id) {
+            imagem.src = `https://assets.codepen.io/7773162/${id}.png`; // Muda a URL da imagem com base no ID
+        }
+    </script>
+</body>
+
+</html>

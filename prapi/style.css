@@ -1,0 +1,430 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,900;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --main-bg: #f8f8f8;
+  --box-bg: #ffffff;
+  --name-color: #232323;
+  --card-bg-text: #343434;
+}
+
+.dark:root {
+  --main-bg: #131313;
+  --box-bg: #232323;
+  --name-color: #f8f8f8;
+  --card-bg-text: #ffffff;
+}
+
+body {
+    background: var(--main-bg);
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 84vh;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 1200px;
+  transform-style: preserve-3d;
+}
+.container .box {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 40px;
+  background: var(--box-bg);
+  border-radius: 20px;
+  transform-style: preserve-3d;
+}
+.container .box::before {
+  content: "NIKE";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 6em;
+  font-weight: 900;
+  color: var(--card-bg-text);
+  font-style: italic;
+  opacity: 0;
+  transition: 0.5s;
+}
+.container .box::after {
+  content: "SHOES";
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 4.5em;
+  font-weight: 900;
+  color: var(--card-bg-text);
+  font-style: italic;
+  opacity: 0;
+  transition: 0.5s;
+}
+.container .box:hover::after,
+.container .box:hover::before {
+  opacity: 0.04;
+}
+.container .box .name {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: var(--name-color);
+  width: 100%;
+  transform-style: preserve-3d;
+  transform: translate3d(0, 0, 75px);
+  transition: 0.5s;
+  opacity: 0;
+  z-index: 10;
+}
+.container .box:hover .name {
+  top: 40px;
+  opacity: 1;
+}
+.container .box .buy {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate3d(0, 0, 75px);
+  color: #fff;
+  background: #333;
+  padding: 10px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.5s;
+  opacity: 0;
+  z-index: 10;
+}
+.container .box:hover .buy {
+  bottom: 30px;
+  opacity: 1;
+}
+.container .box .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: 0.5s;
+  background: #ffffff;
+  transform-style: preserve-3d;
+  z-index: 10;
+  opacity: 1;
+  transform: translate3d(-50%, -50%, 0px);
+}
+.container .box:hover .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  transition: 0.5s;
+  background: #ffffff;
+  transform-style: preserve-3d;
+  z-index: 10;
+  opacity: 1;
+  transform: translate3d(-50%, -50%, 35px);
+}
+
+.container .box .product {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 300px;
+  transition: 0.5s;
+  z-index: 11;
+  transition: 0.5s;
+  transform-style: preserve-3d;
+  transform: translate3d(-50%, -50%, 0px) rotate(-15deg);
+}
+.container .box:hover .product {
+  transform: translate3d(-50%, -50%, 100px) rotate(-15deg);
+}
+.container .box:nth-child(1) .circle,
+.container .box:nth-child(1) .buy {
+  background: #9bdc28;
+}
+.container .box:nth-child(2) .circle,
+.container .box:nth-child(2) .buy {
+  background: #1da3c3;
+}
+.container .box:nth-child(3) .circle,
+.container .box:nth-child(3) .buy {
+  background: #eb0e2f;
+}
+.mode-switch {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color: var(--name-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mode-switch.active .moon {
+  fill: var(--name-color);
+}
+
+
+
+/**
+ * Variables
+ */
+/**
+ * Functions
+ */
+/**
+ * Placeholder
+ */
+ .o-main::before, body::after, body::before {
+    -webkit-animation: curtain 0s cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+            animation: curtain 0s cubic-bezier(0.445, 0.05, 0.55, 0.95) forwards;
+    content: "";
+    height: 100vh;
+    position: absolute;
+    right: -100%;
+    top: 0;
+    width: 100vw;
+    z-index: -1;
+  }
+  
+  /**
+   * Styles
+   */
+
+  @-webkit-keyframes curtain {
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  @keyframes curtain {
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .o-main {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 15vh;
+    position: relative;
+  }
+  .o-main::before {
+    -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
+    -webkit-animation-duration: 0.6s;
+            animation-duration: 0.6s;
+    background-color: #000;
+    display: none;
+    z-index: 0;
+  }
+  
+  .o-content {
+    z-index: 1;
+  }
+  
+  .c-drawing {
+    -webkit-animation: drawing-path 0.7s cubic-bezier(0.95, 0.05, 0.795, 0.035) 0.7s forwards;
+            animation: drawing-path 0.7s cubic-bezier(0.95, 0.05, 0.795, 0.035) 0.7s forwards;
+    stroke-dasharray: 254;
+    stroke-dashoffset: 254;
+    width: 9.375rem;
+  }
+  
+  @-webkit-keyframes drawing-path {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes drawing-path {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .c-glitch {
+    -webkit-animation: fade-in 0.4s linear 1.8s forwards;
+            animation: fade-in 0.4s linear 1.8s forwards;
+    color: white;
+    font-size: 1.125rem;
+    margin: 0.625rem 0 0 1.25rem;
+    opacity: 0;
+    position: relative;
+  }
+  .c-glitch::before, .c-glitch::after {
+    animation: glitch-anime 0s infinite linear alternate-reverse;
+    background: black;
+    color: white;
+    content: attr(data-text);
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+  }
+  .c-glitch::before {
+    -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+    left: -0.125rem;
+    text-shadow: 1px 0 #1100ff;
+  }
+  .c-glitch::after {
+    -webkit-animation-duration: 5s;
+            animation-duration: 5s;
+    left: 0.125rem;
+    text-shadow: -1px 0 red;
+  }
+  
+  @-webkit-keyframes glitch-anime {
+    0%, 100% {
+      -webkit-clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+              clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    20% {
+      -webkit-clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+              clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+    }
+    30% {
+      -webkit-clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+              clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+    }
+    40% {
+      -webkit-clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+              clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+    }
+    50% {
+      -webkit-clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+              clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+    }
+    55% {
+      -webkit-clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+              clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+    }
+    60% {
+      -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+              clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+    }
+    65% {
+      -webkit-clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+              clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+    }
+    70% {
+      -webkit-clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+              clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+    }
+    80% {
+      -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+              clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+    }
+    85% {
+      -webkit-clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+              clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+    }
+    95% {
+      -webkit-clip-path: polygon(0 72%, 100% 72%, 100% 78%, 0 78%);
+              clip-path: polygon(0 72%, 100% 72%, 100% 78%, 0 78%);
+    }
+  }
+  
+  @keyframes glitch-anime {
+    0%, 100% {
+      -webkit-clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+              clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+    }
+    20% {
+      -webkit-clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+              clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+    }
+    30% {
+      -webkit-clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+              clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+    }
+    40% {
+      -webkit-clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+              clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+    }
+    50% {
+      -webkit-clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+              clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+    }
+    55% {
+      -webkit-clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+              clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+    }
+    60% {
+      -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+              clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+    }
+    65% {
+      -webkit-clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+              clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+    }
+    70% {
+      -webkit-clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+              clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+    }
+    80% {
+      -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+              clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+    }
+    85% {
+      -webkit-clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+              clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+    }
+    95% {
+      -webkit-clip-path: polygon(0 72%, 100% 72%, 100% 78%, 0 78%);
+              clip-path: polygon(0 72%, 100% 72%, 100% 78%, 0 78%);
+    }
+  }
+  @-webkit-keyframes fade-in {
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in {
+    100% {
+      opacity: 1;
+    }
+  }
+  /* =Variables
+  ------------------------------------- */
+  /* =Functions
+  ------------------------------------- */
+  /* =Styles
+  ------------------------------------- */
+  .c-intro {
+    -webkit-animation: fe30-anime 1s ease-in-out 4s forwards;
+            animation: fe30-anime 1s ease-in-out 4s forwards;
+    bottom: 3.125rem;
+    left: 50%;
+    opacity: 0;
+    position: fixed;
+    transform: translateX(-50%);
+  }
+  
+  .c-fe30 {
+    color: white;
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+  .c-fe30 a {
+    color: white;
+  }
+  .c-fe30 a:hover {
+    text-decoration: none;
+  }
+  
