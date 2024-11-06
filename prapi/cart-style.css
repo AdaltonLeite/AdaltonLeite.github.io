@@ -203,9 +203,15 @@ input {
     align-items: center;
     font-weight: 600;
     font-size: 14px;
-    padding: 10px 40px;
+    width: 200px;
+    padding: 10px 20px;
     cursor: pointer;
+    display: flex;
+}
 
+.payment-method-selector ul li  img{
+    width: 25px;
+    margin-right: 10px;
 }
 
 .payment-method-selector ul li.active {
