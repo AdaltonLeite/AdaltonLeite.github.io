@@ -62,7 +62,29 @@
 
     <script>
 
-        async function initPrapi() {
+        async function checkMercadoPagoPRApi() {
+            const paymentDetails = {
+                displayItems: [
+                    {
+                        label: 'Produto X',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                ],
+                total: {
+                    label: 'Total',
+                    amount: { currency: 'BRL', value: '50.00' }
+                }
+            };
+            const supportsMercadoPagoPay = await new PaymentRequest(
+                [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
+                paymentDetails,
+            ).canMakePayment();
+            alert(supportsMercadoPagoPay)
+        }
+
+        checkMercadoPagoPRApi()
+
+        function initPrapi() {
             if (window.PaymentRequest) {
                 // Define os métodos de pagamento aceitos
                 const paymentMethods = [
@@ -91,9 +113,8 @@
                 };
 
                 // Cria um novo objeto PaymentRequest
-                const request = await new PaymentRequest(paymentMethods, paymentDetails).canMakePayment();
+                const request = new PaymentRequest(paymentMethods, paymentDetails);
 
-                alert(request)
 
                 // Exibe o sheet de pagamento
                 request.show()
