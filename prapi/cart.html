@@ -93,6 +93,8 @@
                 // Cria um novo objeto PaymentRequest
                 const request = new PaymentRequest(paymentMethods, paymentDetails);
 
+                alert(request.canMakePayment())
+
                 // Exibe o sheet de pagamento
                 request.show()
                     .then(paymentResponse => {
