@@ -62,7 +62,7 @@
 
     <script>
 
-        function initPrapi() {
+        async function initPrapi() {
             if (window.PaymentRequest) {
                 // Define os métodos de pagamento aceitos
                 const paymentMethods = [
@@ -91,9 +91,9 @@
                 };
 
                 // Cria um novo objeto PaymentRequest
-                const request = new PaymentRequest(paymentMethods, paymentDetails);
+                const request = await new PaymentRequest(paymentMethods, paymentDetails).canMakePayment();
 
-                alert(request.canMakePayment().then(res => res))
+                alert(request)
 
                 // Exibe o sheet de pagamento
                 request.show()
