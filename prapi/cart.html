@@ -87,6 +87,7 @@
                 [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
                 paymentDetails,
             ).canMakePayment();
+            console.log(supportsMercadoPagoPay, '1')
             if(supportsMercadoPagoPay) {
                 document.getElementById('purchase-button-mp').style.display = 'grid'
             }
@@ -106,11 +107,12 @@
                     amount: { currency: 'BRL', value: '50.00' }
                 }
             };
-            const supportsMercadoPagoPay = await new PaymentRequest(
+            const supportsMercadoLivrePay = await new PaymentRequest(
                 [{ supportedMethods: "https://bobbucks.dev/pay" }],
                 paymentDetails,
             ).canMakePayment();
-            if(supportsMercadoPagoPay) {
+            console.log(supportsMercadoLivrePay, '2')
+            if(supportsMercadoLivrePay) {
                 document.getElementById('purchase-button-ml').style.display = 'grid'
             }
         }
