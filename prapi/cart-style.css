@@ -372,3 +372,18 @@ ul.custom-radio-list {
         grid-area: 2/1/5/5;
     }
 }
+
+
+.wrapper-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    list-style-type: none;
+    grid-area: 5 / 1;
+
+}
+
+.wrapper-buttons button{
+    display: inherit;
+    grid-area: initial;
+    margin-right: 15px;
+}
