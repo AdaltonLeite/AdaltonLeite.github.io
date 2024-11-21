@@ -56,13 +56,17 @@
             </div>
 
         </div>
-        <button id="purchase-button" class="purchase-button" onclick="initPrapi()"
-            data-content="CONTINUE">CONTINUE</button>
+        <button id="purchase-button-mp" class="purchase-button" onclick="initPrapi()"
+            data-content="CONTINUE">PAY WITH MERCADO PAGO</button>
+        
+        <button id="purchase-button-ml" class="purchase-button" onclick="initPrapi()"
+            data-content="CONTINUE">PAY WITH MERCADO LIBRE</button>
     </div>
 
     <script>
 
         async function checkMercadoPagoPRApi() {
+            document.getElementById('purchase-button-mp').style.display = 'none'
             const paymentDetails = {
                 displayItems: [
                     {
@@ -79,10 +83,36 @@
                 [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
                 paymentDetails,
             ).canMakePayment();
-            alert(supportsMercadoPagoPay)
+            if(supportsMercadoPagoPay) {
+                document.getElementById('purchase-button-mp').style.display = 'grid'
+            }
+        }
+
+        async function checkMercadoLivrePRApi() {
+            document.getElementById('purchase-button-ml').style.display = 'none'
+            const paymentDetails = {
+                displayItems: [
+                    {
+                        label: 'Produto X',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                ],
+                total: {
+                    label: 'Total',
+                    amount: { currency: 'BRL', value: '50.00' }
+                }
+            };
+            const supportsMercadoPagoPay = await new PaymentRequest(
+                [{ supportedMethods: "https://bobbucks.dev/pay" }],
+                paymentDetails,
+            ).canMakePayment();
+            if(supportsMercadoPagoPay) {
+                document.getElementById('purchase-button-ml').style.display = 'grid'
+            }
         }
 
         checkMercadoPagoPRApi()
+        checkMercadoLivrePRApi()
 
         function initPrapi() {
             if (window.PaymentRequest) {
