@@ -56,76 +56,71 @@
 
         </div>
 
-        <div class="wrapper-buttons"> 
-            <button id="purchase-button-mp" class="purchase-button" onclick="initPrapi()"
-            data-content="PAY WITH MP">PAY WITH MERCADO PAGO</button>
         
-        <button id="purchase-button-ml" class="purchase-button" onclick="initPrapi()"
-            data-content="PAY WITH ML">PAY WITH MERCADO LIBRE</button>
-
-        </div>
+        <button id="purchase-button" class="purchase-button" onclick="initPrapi()"
+            data-content="CONTINUE">CONTINUE</button>
         
     </div>
 
     <script>
 
-        async function checkMercadoPagoPRApi() {
-            document.getElementById('purchase-button-mp').style.display = 'none'
-            const paymentDetails = {
-                displayItems: [
-                    {
-                        label: 'Produto X',
-                        amount: { currency: 'BRL', value: '50.00' }
-                    }
-                ],
-                total: {
-                    label: 'Total',
-                    amount: { currency: 'BRL', value: '50.00' }
-                }
-            };
-            const supportsMercadoPagoPay = await new PaymentRequest(
-                [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
-                paymentDetails,
-            ).canMakePayment();
-            console.log(supportsMercadoPagoPay, '1')
-            if(supportsMercadoPagoPay) {
-                document.getElementById('purchase-button-mp').style.display = 'grid'
-            }
-        }
+        // async function checkMercadoPagoPRApi() {
+        //     document.getElementById('purchase-button-mp').style.display = 'none'
+        //     const paymentDetails = {
+        //         displayItems: [
+        //             {
+        //                 label: 'Produto X',
+        //                 amount: { currency: 'BRL', value: '50.00' }
+        //             }
+        //         ],
+        //         total: {
+        //             label: 'Total',
+        //             amount: { currency: 'BRL', value: '50.00' }
+        //         }
+        //     };
+        //     const supportsMercadoPagoPay = await new PaymentRequest(
+        //         [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
+        //         paymentDetails,
+        //     ).canMakePayment();
+        //     console.log(supportsMercadoPagoPay, '1')
+        //     if(supportsMercadoPagoPay) {
+        //         document.getElementById('purchase-button-mp').style.display = 'grid'
+        //     }
+        // }
 
-        async function checkMercadoLivrePRApi() {
-            document.getElementById('purchase-button-ml').style.display = 'none'
-            const paymentDetails = {
-                displayItems: [
-                    {
-                        label: 'Produto X',
-                        amount: { currency: 'BRL', value: '50.00' }
-                    }
-                ],
-                total: {
-                    label: 'Total',
-                    amount: { currency: 'BRL', value: '50.00' }
-                }
-            };
-            const supportsMercadoLivrePay = await new PaymentRequest(
-                [{ supportedMethods: "https://bobbucks.dev/pay" }],
-                paymentDetails,
-            ).canMakePayment();
-            console.log(supportsMercadoLivrePay, '2')
-            if(supportsMercadoLivrePay) {
-                document.getElementById('purchase-button-ml').style.display = 'grid'
-            }
-        }
+        // async function checkMercadoLivrePRApi() {
+        //     document.getElementById('purchase-button-ml').style.display = 'none'
+        //     const paymentDetails = {
+        //         displayItems: [
+        //             {
+        //                 label: 'Produto X',
+        //                 amount: { currency: 'BRL', value: '50.00' }
+        //             }
+        //         ],
+        //         total: {
+        //             label: 'Total',
+        //             amount: { currency: 'BRL', value: '50.00' }
+        //         }
+        //     };
+        //     const supportsMercadoLivrePay = await new PaymentRequest(
+        //         [{ supportedMethods: "https://bobbucks.dev/pay" }],
+        //         paymentDetails,
+        //     ).canMakePayment();
+        //     console.log(supportsMercadoLivrePay, '2')
+        //     if(supportsMercadoLivrePay) {
+        //         document.getElementById('purchase-button-ml').style.display = 'grid'
+        //     }
+        // }
 
-        checkMercadoPagoPRApi()
-        checkMercadoLivrePRApi()
+        // checkMercadoPagoPRApi()
+        // checkMercadoLivrePRApi()
 
         function initPrapi() {
             if (window.PaymentRequest) {
                 // Define os métodos de pagamento aceitos
                 const paymentMethods = [
                     {
-                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html',
+                        supportedMethods: 'https://beta.mercadopago.com/op-pay/prapi/index.html',
                         data: {
                             siteId: 'MLA',
                             publicKey: 'asfsg',
