@@ -64,29 +64,29 @@
 
     <script>
 
-        // async function checkMercadoPagoPRApi() {
-        //     document.getElementById('purchase-button-mp').style.display = 'none'
-        //     const paymentDetails = {
-        //         displayItems: [
-        //             {
-        //                 label: 'Produto X',
-        //                 amount: { currency: 'BRL', value: '50.00' }
-        //             }
-        //         ],
-        //         total: {
-        //             label: 'Total',
-        //             amount: { currency: 'BRL', value: '50.00' }
-        //         }
-        //     };
-        //     const supportsMercadoPagoPay = await new PaymentRequest(
-        //         [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
-        //         paymentDetails,
-        //     ).canMakePayment();
-        //     console.log(supportsMercadoPagoPay, '1')
-        //     if(supportsMercadoPagoPay) {
-        //         document.getElementById('purchase-button-mp').style.display = 'grid'
-        //     }
-        // }
+        async function checkMercadoPagoPRApi() {
+            document.getElementById('purchase-button-mp').style.display = 'none'
+            const paymentDetails = {
+                displayItems: [
+                    {
+                        label: 'Produto X',
+                        amount: { currency: 'BRL', value: '50.00' }
+                    }
+                ],
+                total: {
+                    label: 'Total',
+                    amount: { currency: 'BRL', value: '50.00' }
+                }
+            };
+            const supportsMercadoPagoPay = await new PaymentRequest(
+                [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
+                paymentDetails,
+            ).canMakePayment();
+            console.log(supportsMercadoPagoPay, '1')
+            if(supportsMercadoPagoPay) {
+                document.getElementById('purchase-button-mp').style.display = 'grid'
+            }
+        }
 
         // async function checkMercadoLivrePRApi() {
         //     document.getElementById('purchase-button-ml').style.display = 'none'
@@ -112,7 +112,7 @@
         //     }
         // }
 
-        // checkMercadoPagoPRApi()
+        checkMercadoPagoPRApi()
         // checkMercadoLivrePRApi()
 
         function initPrapi() {
