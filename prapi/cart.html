@@ -64,29 +64,6 @@
 
     <script>
 
-        function getPM() {
-            const myHeaders = new Headers();
-            myHeaders.append("Authorization", "12312312");
-            myHeaders.append("X-Caller-Id", "249496763");
-            myHeaders.append("X-Client-Id", "5177447688483435");
-            myHeaders.append("X-Caller-SiteId", "MLB");
-            myHeaders.append("X-Collector-Id", "1288472937");
-            myHeaders.append("X-Auth-Type", "prapi");
-
-            const requestOptions = {
-                method: "GET",
-                headers: myHeaders,
-                redirect: "follow"
-            };
-
-            fetch("https://api.mercadopago.com/v1/account-payment-methods?amount=1020.19", requestOptions)
-                .then((response) => response.text())
-                .then((result) => console.log(result))
-                .catch((error) => console.error(error));
-        }
-
-        getPM()
-
         async function checkMercadoPagoPRApi() {
             document.getElementById('purchase-button-mp').style.display = 'none'
             const paymentDetails = {
