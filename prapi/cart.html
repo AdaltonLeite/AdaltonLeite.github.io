@@ -63,7 +63,8 @@
     </div>
 
     <script>
-
+        let mercadoPagoOK = false
+        let mercadoLivreOK = false
         async function checkMercadoPagoPRApi() {
             // document.getElementById('purchase-button-mp').style.display = 'none'
             const paymentDetails = {
@@ -84,9 +85,10 @@
             ).canMakePayment();
             console.log(supportsMercadoPagoPay, '1')
             alert(`APP Mercado Pago: ${supportsMercadoPagoPay ? 'Instalada' : 'Não instalada'}`)
-            // if (supportsMercadoPagoPay) {
-            //     document.getElementById('purchase-button-mp').style.display = 'grid'
-            // }
+            if (supportsMercadoPagoPay) {
+                mercadoPagoOK = true
+                // document.getElementById('purchase-button-mp').style.display = 'grid'
+            }
         }
 
         checkMercadoPagoPRApi()
@@ -111,20 +113,23 @@
             ).canMakePayment();
             console.log(supportsMercadoLivrePay, '2')
             alert(`APP Mercado Livre: ${supportsMercadoLivrePay ? 'Instalada' : 'Não instalada' }`)
-            // if(supportsMercadoLivrePay) {
-            //     document.getElementById('purchase-button-ml').style.display = 'grid'
-            // }
+            if(supportsMercadoLivrePay) {
+                mercadoLivreOK = true
+                // document.getElementById('purchase-button-ml').style.display = 'grid'
+            }
         }
 
 
         checkMercadoLivrePRApi()
 
         function initPrapi() {
-            if (window.PaymentRequest) {
+            if (window.PaymentRequest && (mercadoPagoOK || mercadoLivreOK)) {
+                const appType = mercadoPagoOK ? 'MP' : mercadoLivreOK ? 'ML' : 'none'
+                const url = `https://beta.mercadopago.com/fido/pay/provider/index.html?app=${appType}`
                 // Define os métodos de pagamento aceitos
                 const paymentMethods = [
                     {
-                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html?app=MP',
+                        supportedMethods: url,
                         data: {
                             siteId: 'MLA',
                             publicKey: 'asfsg',
