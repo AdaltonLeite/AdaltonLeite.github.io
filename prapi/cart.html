@@ -83,7 +83,7 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoPagoPay, '1')
-            alert("APP Mercado Pago:", supportsMercadoPagoPay)
+            alert(`APP Mercado Pago: ${supportsMercadoPagoPay ? 'Instalada' : 'Não instalada'}`)
             // if (supportsMercadoPagoPay) {
             //     document.getElementById('purchase-button-mp').style.display = 'grid'
             // }
@@ -110,7 +110,7 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoLivrePay, '2')
-            alert("APP Mercado Livre:", supportsMercadoLivrePay)
+            alert(`APP Mercado Livre: ${supportsMercadoLivrePay ? 'Instalada' : 'Não instalada' }`)
             // if(supportsMercadoLivrePay) {
             //     document.getElementById('purchase-button-ml').style.display = 'grid'
             // }
