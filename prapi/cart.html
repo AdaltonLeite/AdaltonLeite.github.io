@@ -79,7 +79,7 @@
                 }
             };
             const supportsMercadoPagoPay = await new PaymentRequest(
-                [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html" }],
+                [{ supportedMethods: "https://beta.mercadopago.com/fido/pay/provider/index.html?app=MP" }],
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoPagoPay, '1')
