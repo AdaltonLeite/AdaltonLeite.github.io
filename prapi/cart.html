@@ -83,7 +83,7 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoPagoPay, '1')
-            alert(supportsMercadoPagoPay)
+            alert("APP Mercado Pago:", supportsMercadoPagoPay)
             // if (supportsMercadoPagoPay) {
             //     document.getElementById('purchase-button-mp').style.display = 'grid'
             // }
@@ -110,6 +110,7 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoLivrePay, '2')
+            alert("APP Mercado Livre:", supportsMercadoLivrePay)
             // if(supportsMercadoLivrePay) {
             //     document.getElementById('purchase-button-ml').style.display = 'grid'
             // }
@@ -123,11 +124,11 @@
                 // Define os métodos de pagamento aceitos
                 const paymentMethods = [
                     {
-                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html',
+                        supportedMethods: 'https://beta.mercadopago.com/fido/pay/provider/index.html?app=ML',
                         data: {
                             siteId: 'MLA',
                             publicKey: 'asfsg',
-                            email: 'teste@gmail.com'
+                            email: 'test_user_82578115@testuser.com'
                         }
                     }
                 ];
