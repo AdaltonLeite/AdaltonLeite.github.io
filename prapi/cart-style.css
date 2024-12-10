@@ -387,3 +387,40 @@ ul.custom-radio-list {
     grid-area: initial;
     margin-right: 15px;
 }
+
+.none{
+    display: none!important;
+}
+
+#payment-selector {
+    display: grid;
+    grid-area: 2 / 1 / 5 / 4;
+}
+
+#payment-selector ul li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border: 1px solid #E5E5E5;
+    padding: 12px 0px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    min-height: 62px;
+}
+
+#payment-selector ul li p{
+    font-size: 12px;
+}
+
+#payment-selector ul li span{
+    color:#00A650;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 8px;
+    background-color: #00a65038;
+}
+
+#payment-selector ul li input{
+    width: 50px;
+}

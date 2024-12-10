@@ -60,6 +60,37 @@
         <button id="purchase-button" class="purchase-button" onclick="initPrapi()"
             data-content="CONTINUE">CONTINUE</button>
 
+
+
+        <div id="payment-selector " class="none">
+            <ul>
+                <li>
+                    <input type="radio" />
+                    <div>
+                        <p>Cartão de crédito Mercado Pago</p>
+                        <span>Em até 6 vezes sem juros</span>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" />
+                    <div>
+                        <p>Santander crédito **** 1234</p>
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" />
+                    <div>
+                        <p>Saldo en Mercado Pago Wallet</p>
+                        <span>Suficiente para esta compra</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="payButtons"  class="wrapper-buttons none">
+            <button id="purchase-button" class="purchase-button" onclick="initPrapi()"
+                data-content="PAGAR">PAGAR</button>
+        </div>
+
     </div>
 
     <script>
@@ -84,7 +115,7 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoPagoPay, '1')
-            alert(`APP Mercado Pago: ${supportsMercadoPagoPay ? 'Instalada' : 'Não instalada'}`)
+            // alert(`APP Mercado Pago: ${supportsMercadoPagoPay ? 'Instalada' : 'Não instalada'}`)
             if (supportsMercadoPagoPay) {
                 mercadoPagoOK = true
                 // document.getElementById('purchase-button-mp').style.display = 'grid'
@@ -112,8 +143,8 @@
                 paymentDetails,
             ).canMakePayment();
             console.log(supportsMercadoLivrePay, '2')
-            alert(`APP Mercado Livre: ${supportsMercadoLivrePay ? 'Instalada' : 'Não instalada' }`)
-            if(supportsMercadoLivrePay) {
+            // alert(`APP Mercado Livre: ${supportsMercadoLivrePay ? 'Instalada' : 'Não instalada' }`)
+            if (supportsMercadoLivrePay) {
                 mercadoLivreOK = true
                 // document.getElementById('purchase-button-ml').style.display = 'grid'
             }
@@ -121,6 +152,9 @@
 
 
         checkMercadoLivrePRApi()
+
+        document.getElementById('payButtons').style.display = 'none';
+        document.getElementById('payment-selector').style.display = 'none';
 
         function initPrapi() {
             if (window.PaymentRequest && (mercadoPagoOK || mercadoLivreOK)) {
@@ -161,6 +195,12 @@
                     .then(paymentResponse => {
                         // Aqui você pode processar o pagamento
                         console.log('Detalhes do pagamento:', paymentResponse);
+
+                        document.getElementById('payButtons').style.display = 'block';
+                        document.getElementById('payment-selector').style.display = 'block';
+
+                        document.getElementById('melipay').style.display = 'none';
+                        document.getElementById('purchase-button').style.display = 'none';
 
                         // Marcar a transação como sucesso ou falha
                         return paymentResponse.complete('success');
