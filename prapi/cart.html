@@ -196,11 +196,11 @@
                         // Aqui você pode processar o pagamento
                         console.log('Detalhes do pagamento:', paymentResponse);
 
-                        // document.getElementById('payButtons').style.display = 'block';
-                        // document.getElementById('payment-selector').style.display = 'block';
+                        document.getElementById('payButtons').style.display = 'block';
+                        document.getElementById('payment-selector').style.display = 'block';
 
-                        // document.getElementById('melipay').style.display = 'none';
-                        // document.getElementById('purchase-button').style.display = 'none';
+                        document.getElementById('melipay').style.display = 'none';
+                        document.getElementById('purchase-button').style.display = 'none';
 
                         // Marcar a transação como sucesso ou falha
                         return paymentResponse.complete('success');
