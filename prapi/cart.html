@@ -249,7 +249,7 @@
                         console.log('Detalhes do pagamento:', paymentResponse);
                         // alert(paymentResponse.details.token)
 
-                        getPM(paymentResponse.details.token)
+                        getPM(`${paymentResponse.details.token}`)
 
 
                         // document.getElementById('payButtons').style.display = 'block';
