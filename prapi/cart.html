@@ -157,6 +157,57 @@
         document.getElementById('payButtons').style.display = 'none';
         document.getElementById('payment-selector').style.display = 'none';
 
+        function getPM(superToken) {
+            if(!superToken) 
+                return 
+            const mapType = {
+                'credit_card': 'crédito',
+                'debit_card': 'debito'
+            }
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", "12312312");
+            myHeaders.append("X-Caller-Id", atob(superToken));
+            myHeaders.append("X-Client-Id", "5177447688483435");
+            myHeaders.append("X-Caller-SiteId", "MLB");
+            myHeaders.append("X-Collector-Id", "1288472937");
+            myHeaders.append("X-Auth-Type", "prapi");
+
+            const requestOptions = {
+                method: "GET",
+                headers: myHeaders,
+                redirect: "follow"
+            };
+
+            fetch("https://api.mercadopago.com/v1/account-payment-methods?amount=100.00", requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    console.log(result)
+                    // Mapeia o array para criar elementos <li>
+                    const listItems = result.data.map(item => `
+                    <li>
+                        <input type="radio" />
+                        <div>
+                            <p>
+                                ${item.name}
+                                ${item.type !== 'account_money' ? `${mapType[item.type]} **** ${item.card.card_number.last_four_digits}` : ''}
+                            </p>
+                        </div>
+                    </li>
+                    `).join('');
+
+                    // Insere no elemento <ul> com id "itemList"
+                    document.getElementById('list-payment-methods').innerHTML = listItems;
+
+                    document.getElementById('payButtons').style.display = 'block';
+                    document.getElementById('payment-selector').style.display = 'block';
+
+                    document.getElementById('melipay').style.display = 'none';
+                    document.getElementById('purchase-button').style.display = 'none';
+
+                })
+                .catch((error) => console.error(error));
+        }
+
         function initPrapi() {
             if (window.PaymentRequest && (mercadoPagoOK || mercadoLivreOK)) {
                 const appType = mercadoPagoOK ? 'MP' : mercadoLivreOK ? 'ML' : 'none'
@@ -196,13 +247,16 @@
                     .then(paymentResponse => {
                         // Aqui você pode processar o pagamento
                         console.log('Detalhes do pagamento:', paymentResponse);
-                        alert(paymentResponse.details.token)
+                        // alert(paymentResponse.details.token)
 
-                        document.getElementById('payButtons').style.display = 'block';
-                        document.getElementById('payment-selector').style.display = 'block';
+                        getPM(paymentResponse.details.token)
 
-                        document.getElementById('melipay').style.display = 'none';
-                        document.getElementById('purchase-button').style.display = 'none';
+
+                        // document.getElementById('payButtons').style.display = 'block';
+                        // document.getElementById('payment-selector').style.display = 'block';
+
+                        // document.getElementById('melipay').style.display = 'none';
+                        // document.getElementById('purchase-button').style.display = 'none';
 
                         // Marcar a transação como sucesso ou falha
                         return paymentResponse.complete('success');
