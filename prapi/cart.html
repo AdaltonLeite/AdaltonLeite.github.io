@@ -195,6 +195,7 @@
                     .then(paymentResponse => {
                         // Aqui você pode processar o pagamento
                         console.log('Detalhes do pagamento:', paymentResponse);
+                        alert(paymentResponse)
 
                         document.getElementById('payButtons').style.display = 'block';
                         document.getElementById('payment-selector').style.display = 'block';
