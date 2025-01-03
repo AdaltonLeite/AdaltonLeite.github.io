@@ -340,8 +340,8 @@
                 };
 
                 fetch("https://lhtqts-3000.csb.app/api", requestOptions2)
-                    .then((response) => response.text())
-                    .then((result) => alert('pago com sucesso'))
+                    .then((response) => response.json())
+                    .then((result) => alert(result.status))
                     .catch((error) => alert('error'));
             } else {
                 alert('Por favor, selecione uma opção.');
