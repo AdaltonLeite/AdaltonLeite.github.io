@@ -144,8 +144,9 @@
             }
             const myHeaders = new Headers();
             myHeaders.append("Authorization", "12312312");
-            myHeaders.append("X-Caller-Id", atob(superToken));
-            myHeaders.append("X-Client-Id", "5177447688483435");
+            // myHeaders.append("X-Caller-Id", atob(superToken));
+            myHeaders.append("X-Caller-Id", superToken);
+            myHeaders.append("X-Client-Id", "874202490252970");
             myHeaders.append("X-Caller-SiteId", "MLB");
             myHeaders.append("X-Collector-Id", "1288472937");
             myHeaders.append("X-Auth-Type", "prapi");
@@ -339,7 +340,7 @@
                     redirect: "follow"
                 };
 
-                fetch("https://lhtqts-3000.csb.app/api", requestOptions2)
+                fetch("https://examples-vercel.vercel.app/api", requestOptions2)
                     .then((response) => response.json())
                     .then((result) => alert(result.id))
                     .catch((error) => alert('error'));
