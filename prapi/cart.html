@@ -341,7 +341,7 @@
 
                 fetch("https://lhtqts-3000.csb.app/api", requestOptions2)
                     .then((response) => response.json())
-                    .then((result) => alert(result.status))
+                    .then((result) => alert(JSON.stringify(result)))
                     .catch((error) => alert('error'));
             } else {
                 alert('Por favor, selecione uma opção.');
