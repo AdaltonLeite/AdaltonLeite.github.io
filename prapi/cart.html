@@ -62,16 +62,15 @@
 
 
 
-        <div id="payment-selector" >
+        <div id="payment-selector">
             <ul id="list-payment-methods"></ul>
         </div>
-        <div id="payButtons"  class="wrapper-buttons">
-            <button id="purchase-button" class="purchase-button" onclick="alert('pago processado')"
-                data-content="PAGAR">PAGAR</button>
+        <div id="payButtons" class="wrapper-buttons">
+            <button id="submit-button" class="purchase-button" data-content="PAGAR">PAGAR</button>
         </div>
 
     </div>
-    
+
 
     <script>
         let mercadoPagoOK = false
@@ -137,8 +136,8 @@
         document.getElementById('payment-selector').style.display = 'none';
 
         function getPM(superToken) {
-            if(!superToken) 
-                return 
+            if (!superToken)
+                return
             const mapType = {
                 'credit_card': 'crédito',
                 'debit_card': 'debito'
@@ -164,7 +163,7 @@
                     // Mapeia o array para criar elementos <li>
                     const listItems = result.data.map(item => `
                     <li>
-                        <input type="radio" />
+                        <input type="radio" name="opcao" value="${item.token}" />
                         <div>
                             <p>
                                 ${item.name}
@@ -286,6 +285,68 @@
         });
 
 
+        document.getElementById('submit-button').addEventListener('click', function () {
+            // Seleciona todos os radio buttons com o nome "opcao"
+            const radios = document.getElementsByName('opcao');
+            let selecionado;
+
+            // Loop através dos radio buttons e encontra o selecionado
+            for (const radio of radios) {
+                if (radio.checked) {
+                    selecionado = radio.value; // Obtém o valor do radio selecionado
+                    break; // Para o loop após encontrar o radio selecionado
+                }
+            }
+
+            // Verifique se algum radio foi selecionado
+            if (selecionado) {
+                const myHeaders2 = new Headers();
+                myHeaders2.append("Content-Type", "application/json");
+
+                const raw2 = JSON.stringify({
+                    "payer": {
+                        "email": "teste@testuser.com",
+                        "first_name": "first name",
+                        "last_name": "last name",
+                        "identification": {
+                            "type": "CPF",
+                            "number": "99265372001"
+                        },
+                        "phone": {
+                            "area_code": "55",
+                            "number": "1112345678"
+                        }
+                    },
+                    "transactions": {
+                        "payments": [
+                            {
+                                "amount": "100.00",
+                                "payment_method": {
+                                    "id": "account_money",
+                                    "type": "account_money",
+                                    "token": `${selecionado}`,
+                                    "statement_descriptor": "Gabs"
+                                }
+                            }
+                        ]
+                    }
+                });
+
+                const requestOptions2 = {
+                    method: "POST",
+                    headers: myHeaders2,
+                    body: raw2,
+                    redirect: "follow"
+                };
+
+                fetch("https://lhtqts-3000.csb.app/api", requestOptions2)
+                    .then((response) => response.text())
+                    .then((result) => alert('pago com sucesso'))
+                    .catch((error) => alert('error'));
+            } else {
+                alert('Por favor, selecione uma opção.');
+            }
+        });
 
     </script>
     <script>
